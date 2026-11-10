@@ -50,52 +50,53 @@ def patch(raw,kind):
   asm(0x50f174,f'b {rpc}')
   # Loader's visible Telegram link (decrypted constructor data).
   for at in [0x7fd9a0,0x8783d0]:string(at,'https://t.me/grndproject','https://t.me/Icon_Crack')
-  loadername=addr+0xc00;exportname=addr+0xc30
-  worker_code=A(f'''
-   stp x29,x30,[sp,#-64]!
+  worker_code=A("stp x29,x30,[sp,#-32]!;str x19,[sp,#16];bl 0x49a514;mov x1,x0;adrp x19,0x87a000;ldr x0,[x19,#0x8d8];add x8,x19,#0x8f8;bl 0x4f7c1c;add x19,x19,#0x8d0;mov w8,#1;stlr w8,[x19];mov x0,xzr;ldr x19,[sp,#16];ldp x29,x30,[sp],#32;ret",worker)
+  # No license service transport in the local build. Output buffers are initialized.
+  rpc_code=A('cbz x3,skip1;str xzr,[x3];skip1:cbz x4,skip2;str xzr,[x4];skip2:cbz x5,done;cbz x6,done;strb wzr,[x5];done:mov w0,wzr;ret',rpc)
+ else:
+  host_name=addr+0xc00;host_export=addr+0xc30
+  worker_code=A(f'''stp x29,x30,[sp,#-64]!
    stp x19,x20,[sp,#16]
    stp x21,x22,[sp,#32]
    mov x29,sp
    sub sp,sp,#0x800
-   bl 0x49a514
-   mov x1,x0
-   adrp x19,0x87a000
-   ldr x0,[x19,#0x8d8]
-   add x8,x19,#0x8f8
-   bl 0x4f7c1c
-   adrp x0,{loadername&~4095}
-   add x0,x0,#{loadername&4095}
+   adrp x8,0x19a000
+   ldr w8,[x8,#0x6c4]
+   mov w9,#0x20
+   movk w9,#0x5280,lsl #16
+   cmp w8,w9
+   b.ne failure
+   adrp x0,{host_name&~4095}
+   add x0,x0,#{host_name&4095}
    mov w1,#2
-   bl {plt['dlopen']}
-   cbz x0,fail
-   adrp x1,{exportname&~4095}
-   add x1,x1,#{exportname&4095}
-   bl {plt['dlsym']}
-   cbz x0,fail
-   mov x20,x0
-   add x0,x19,#0x8f8
+   bl {{DLOPEN}}
+   cbz x0,failure
+   adrp x1,{host_export&~4095}
+   add x1,x1,#{host_export&4095}
+   bl {{DLSYM}}
+   cbz x0,failure
+   movz x8,#0x2a0c
+   movk x8,#0x48,lsl #16
+   sub x19,x0,x8
+   movz x8,#0xa8f8
+   movk x8,#0x87,lsl #16
+   add x0,x19,x8
    mov x1,sp
    mov w2,#0x800
-   blr x20
-   cbnz w0,fail
-   mov w8,#1
+   bl 0x106c5c
+   cbnz w0,failure
+   mov w0,#6
+   movk w0,#1,lsl #16
    b finished
-   fail: mov w8,#-1
+   failure:mov w0,#-1
    finished:
-   add x19,x19,#0x8d0
-   stlr w8,[x19]
-   mov x0,xzr
    add sp,sp,#0x800
    ldp x21,x22,[sp,#32]
    ldp x19,x20,[sp,#16]
    ldp x29,x30,[sp],#64
-   ret
-  ''',worker)
+   ret'''.replace('{DLOPEN}',str(plt['dlopen'])).replace('{DLSYM}',str(plt['dlsym'])),worker)
   assert len(worker_code)<0x200
-  # No license service transport in the local build. Output buffers are initialized.
-  rpc_code=A('cbz x3,skip1;str xzr,[x3];skip1:cbz x4,skip2;str xzr,[x4];skip2:cbz x5,done;cbz x6,done;strb wzr,[x5];done:mov w0,wzr;ret',rpc)
- else:
-  worker_code=b'';rpc_code=b''
+  rpc_code=b''
   # Stop license polling and Telegram account activation workers.
   for a in [0x189938,0x198dc4,0x198f74]:asm(a,'ret')
   # Local license predicate used by the menu. The address-profile predicate is retained.
@@ -188,9 +189,54 @@ def patch(raw,kind):
  block=bytearray(0x1000);block[:len(pre)]=pre;block[0x100:0x100+len(post_code)]=post_code
  block[0x800:0x800+len(worker_code)]=worker_code;block[0xa00:0xa00+len(rpc_code)]=rpc_code
  if kind=='host':
-  for offset,value in [(0xc00,b'libiconpayload.so\0'),(0xc30,b'grand_payload_activate\0')]:block[offset:offset+len(value)]=value
+  pass
+ else:
+  for offset,value in [(0xc00,b'libgrnd.so\0'),(0xc30,b'JNI_OnLoad\0')]:block[offset:offset+len(value)]=value
  block+=records+data
- out=bytearray(raw);note=next(i for i,s in enumerate(segs) if s['p_type']=='PT_NOTE')
+ dynamic_updates={}
+ if kind=='payload':
+  def append_table(value):
+   block.extend(bytes((-len(block))%8));position=addr+len(block);block.extend(value);return position
+  original_strings=raw[conv(tags['DT_STRTAB']):conv(tags['DT_STRTAB'])+tags['DT_STRSZ']]
+  strings=original_strings+b'JNI_OnLoad\0'
+  stndx=next(x['st_shndx'] for x in sy if x.name=='grand_payload_activate')
+  original_symbols=raw[conv(tags['DT_SYMTAB']):conv(tags['DT_SYMTAB'])+24*len(sy)]
+  new_symbols=original_symbols+struct.pack('<IBBHQQ',len(original_strings),0x12,0,stndx,worker,len(worker_code))
+  def elf_hash(name):
+   value=0
+   for byte in name.encode():
+    value=(value<<4)+byte;high=value&0xf0000000
+    if high:value^=high>>24
+    value&=~high
+   return value&0xffffffff
+  all_names=[x.name for x in sy]+['JNI_OnLoad'];nbucket=31;buckets=[0]*nbucket;chains=[0]*len(all_names)
+  for index,name in enumerate(all_names):
+   if index==0 or not name:continue
+   bucket=elf_hash(name)%nbucket
+   if not buckets[bucket]:buckets[bucket]=index
+   else:
+    previous=buckets[bucket]
+    while chains[previous]:previous=chains[previous]
+    chains[previous]=index
+  hash_data=struct.pack('<II',nbucket,len(all_names))+struct.pack('<'+'I'*(len(buckets)+len(chains)),*(buckets+chains))
+  dynamic_updates={'DT_STRTAB':(5,append_table(strings)),'DT_STRSZ':(10,len(strings)),'DT_SYMTAB':(6,append_table(new_symbols)),'DT_GNU_HASH':(4,append_table(hash_data))}
+  if 'DT_VERSYM' in tags:
+   versions=raw[conv(tags['DT_VERSYM']):conv(tags['DT_VERSYM'])+2*len(sy)]+struct.pack('<H',1)
+   dynamic_updates['DT_VERSYM']=(0x6ffffff0,append_table(versions))
+ out=bytearray(raw)
+ for index,entry in enumerate(dyn.iter_tags()):
+  if entry.entry.d_tag in dynamic_updates:
+   tag,value=dynamic_updates[entry.entry.d_tag];struct.pack_into('<QQ',out,dyn['p_offset']+index*16,tag,value)
+ if kind=='payload':
+  section_moves={tags['DT_STRTAB']:(dynamic_updates['DT_STRTAB'][1],len(strings),None,None),tags['DT_SYMTAB']:(dynamic_updates['DT_SYMTAB'][1],len(new_symbols),None,None),tags['DT_GNU_HASH']:(dynamic_updates['DT_GNU_HASH'][1],len(hash_data),5,4)}
+  if 'DT_VERSYM' in tags:section_moves[tags['DT_VERSYM']]=(dynamic_updates['DT_VERSYM'][1],len(versions),None,None)
+  for index,section in enumerate(e.iter_sections()):
+   if section['sh_addr'] in section_moves:
+    new_addr,new_size,new_type,new_entsize=section_moves[section['sh_addr']];at=e['e_shoff']+index*e['e_shentsize']
+    struct.pack_into('<QQQ',out,at+16,new_addr,off+new_addr-addr,new_size)
+    if new_type is not None:struct.pack_into('<I',out,at+4,new_type)
+    if new_entsize is not None:struct.pack_into('<Q',out,at+56,new_entsize)
+ note=next(i for i,s in enumerate(segs) if s['p_type']=='PT_NOTE')
  struct.pack_into('<IIQQQQQQ',out,e['e_phoff']+note*56,1,5,off,addr,addr,len(block),len(block),16384)
  struct.pack_into('<Q',out,last[0]+16,post)
  # Protector binds a seeded XXH32 to its metadata and normalized program headers.
@@ -201,7 +247,7 @@ def patch(raw,kind):
   hash_value=xx.XXH32(bytes(item),56,hash_value)
  struct.pack_into('<I',out,ph-4,hash_value)
  out+=bytes(off-len(out))+block
- return bytes(out),{'kind':kind,'new_segment':hex(addr),'offset':hex(off),'first_ctor_original':hex(first[3]),'last_ctor_wrapper':hex(post),'post':hex(post),'worker':hex(worker),'rpc':hex(rpc),'mprotect':hex(plt['mprotect']),'patches':[{'address':hex(a),'size':len(b),'sha256':hashlib.sha256(b).hexdigest()} for a,b in patches]}
+ return bytes(out),{'kind':kind,'new_segment':hex(addr),'offset':hex(off),'first_ctor_original':hex(first[3]),'last_ctor_wrapper':hex(post),'post':hex(post),'late_jni_activation':kind=='payload','worker':hex(worker),'rpc':hex(rpc),'mprotect':hex(plt['mprotect']),'patches':[{'address':hex(a),'size':len(b),'sha256':hashlib.sha256(b).hexdigest()} for a,b in patches]}
 if __name__=='__main__':
  import argparse
  ap=argparse.ArgumentParser(description=__doc__)

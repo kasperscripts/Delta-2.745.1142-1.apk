@@ -1,13 +1,14 @@
 {
-  "apk_sha256": "5fa7218c3be9a661d3a22ac3b61879662464310610b006cd42994ce4bef6e458",
-  "host_sha256": "76c28f4a550f32ec82e035b6f1853f4974cca354eb5fbe6ff6cbf2ef86f2cc91",
-  "payload_sha256": "6c1eb5df829c816e722961fb8ea7d3c632de27da9dfcf5d7e7c7b97b91ea3741",
+  "apk_sha256": "fcf1ce2518487ce0c57f2e56d34ddd550029e6d79f5304a4f24d2a7e91c368c0",
+  "host_sha256": "5bcf3cc0f690308e249468c91acbdcd208fd3220a4ab0c853f0b2a89e0349224",
+  "payload_sha256": "094252b1622d90b2a0d4085a6742fa8da3e4d9cfaecbf601bc22660a0dae3ee5",
   "constructors_executed": {
     "0x20000000": 646,
     "0x30000000": 3335
   },
   "jni_registered": 21,
   "native_startup_state": 1,
+  "deferred_activation_verified": true,
   "local_license_predicate": 1,
   "address_dependent_feature_predicate": 0,
   "menu_callback": "0x301ad55c",

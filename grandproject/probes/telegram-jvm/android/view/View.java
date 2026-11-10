@@ -1,0 +1,1 @@
+package android.view; public class View {public Object tag;public View findViewWithTag(Object t){return null;} public void setTag(Object t){tag=t;} public void setBackgroundColor(int v){}public void setPadding(int a,int b,int c,int d){}public void setClickable(boolean b){}public void setFocusable(boolean b){} }

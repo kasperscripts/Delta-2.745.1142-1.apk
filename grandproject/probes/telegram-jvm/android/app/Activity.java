@@ -1,0 +1,1 @@
+package android.app; import android.content.*; import android.view.*; public class Activity extends Context {public void startActivity(Intent i){} public Window getWindow(){return new Window();}public void addContentView(View v,Object p){} }

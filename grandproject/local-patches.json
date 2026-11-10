@@ -6,6 +6,7 @@
     "first_ctor_original": "0x740000",
     "last_ctor_wrapper": "0x88c100",
     "post": "0x88c100",
+    "late_jni_activation": false,
     "worker": "0x88c800",
     "rpc": "0x88ca00",
     "mprotect": "0x742cd0",
@@ -31,7 +32,7 @@
         "sha256": "e6453f507767bf6a6ec3eb10bc13ea19f2375d3e019f9743a8a51ac3b57c0fcb"
       }
     ],
-    "sha256": "76c28f4a550f32ec82e035b6f1853f4974cca354eb5fbe6ff6cbf2ef86f2cc91"
+    "sha256": "5bcf3cc0f690308e249468c91acbdcd208fd3220a4ab0c853f0b2a89e0349224"
   },
   {
     "kind": "payload",
@@ -40,6 +41,7 @@
     "first_ctor_original": "0x210000",
     "last_ctor_wrapper": "0x2d8100",
     "post": "0x2d8100",
+    "late_jni_activation": true,
     "worker": "0x2d8800",
     "rpc": "0x2d8a00",
     "mprotect": "0x2125d0",
@@ -115,6 +117,6 @@
         "sha256": "b7803bd39deb575733108fecbccf10fa9dc407c86d4e73ae0fc8b998bfeed151"
       }
     ],
-    "sha256": "6c1eb5df829c816e722961fb8ea7d3c632de27da9dfcf5d7e7c7b97b91ea3741"
+    "sha256": "094252b1622d90b2a0d4085a6742fa8da3e4d9cfaecbf601bc22660a0dae3ee5"
   }
 ]

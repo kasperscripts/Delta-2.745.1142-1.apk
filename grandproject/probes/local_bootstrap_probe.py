@@ -10,8 +10,8 @@ from pathlib import Path
 from unicorn import *
 from unicorn.arm64_const import *
 from elftools.elf.elffile import ELFFile
-EXPECTED_HOST='76c28f4a550f32ec82e035b6f1853f4974cca354eb5fbe6ff6cbf2ef86f2cc91'
-EXPECTED_PAYLOAD='6c1eb5df829c816e722961fb8ea7d3c632de27da9dfcf5d7e7c7b97b91ea3741'
+EXPECTED_HOST='5bcf3cc0f690308e249468c91acbdcd208fd3220a4ab0c853f0b2a89e0349224'
+EXPECTED_PAYLOAD='094252b1622d90b2a0d4085a6742fa8da3e4d9cfaecbf601bc22660a0dae3ee5'
 ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('apk',type=Path);ap.add_argument('--output',type=Path,required=True);args=ap.parse_args()
 u=Uc(UC_ARCH_ARM64,UC_MODE_ARM)
 for at,size in [(0x20000000,0x1000000),(0x30000000,0x400000),(0x2000000,0x2000000),(0x4000000,0x200000)]:u.mem_map(at,size)
@@ -91,8 +91,8 @@ def imported(machine,pc,size,_):
  elif n=='clock_gettime':now=time.time_ns();u.mem_write(a[1],struct.pack('<QQ',now//1000000000,now%1000000000));ret()
  elif n=='localeconv':
   at=alloc(128);q=alloc(16);u.mem_write(q,b'.\0');u.mem_write(at,struct.pack('<10Q',q,*([q+1]*9)));ret(at)
- elif n=='dlopen':assert cs(a[0])=='libiconpayload.so';ret(PAYLOAD)
- elif n=='dlsym':assert cs(a[1])=='grand_payload_activate';ret(PAYLOAD+0x106c5c)
+ elif n=='dlopen':assert cs(a[0])=='libgrnd.so';ret(HOST)
+ elif n=='dlsym':assert cs(a[1])=='JNI_OnLoad';ret(HOST+0x482a0c)
  elif n=='syscall':ret(syscall(a[0],a[1:]))
  elif n in ['open','__open_2']:ret(open_file(cs(a[0])))
  else:raise RuntimeError(('unimplemented import',n,hex(u.reg_read(UC_ARM64_REG_LR))))
@@ -157,6 +157,11 @@ assert call(HOST+0x482a0c,[VM,0])==0x10006
 assert len(jni_methods)==21
 assert threads==[(HOST+0x47a998,0)]
 assert call(HOST+0x47a998)==0
+assert call(HOST+0x483984)==1
+assert ptr(HOST+0x882f68)==0,'Menu must not activate before the game libraries are ready'
+pe=ELFFile(io.BytesIO(payload));pd=next(x for x in pe.iter_segments() if x['p_type']=='PT_DYNAMIC')
+entry=next(x['st_value'] for x in pd.iter_symbols() if x.name=='JNI_OnLoad')
+assert call(PAYLOAD+entry,[VM,0])==0x10006
 state=call(HOST+0x483984);license_ok=call(PAYLOAD+0x19a6c4);feature_ok=call(PAYLOAD+0x193fb8);draw=ptr(HOST+0x882f68)
 assert state==license_ok==1 and feature_ok==0 and draw==PAYLOAD+0x1ad55c
 assert [call(PAYLOAD+0x1a2ae4,[i]) for i in range(60)]==[0]*60
@@ -164,5 +169,5 @@ rpc_out=alloc(16);error=alloc(64);u.mem_write(rpc_out,b'\xff'*16)
 op=alloc(32);u.mem_write(op,b'premium.offsets\0')
 assert call(HOST+0x50f174,[op,0,0,rpc_out,rpc_out+8,error,64])==0
 assert bytes(u.mem_read(rpc_out,16))==bytes(16)
-report={'apk_sha256':hashlib.file_digest(args.apk.open('rb'),'sha256').hexdigest(),'host_sha256':hashlib.sha256(host).hexdigest(),'payload_sha256':hashlib.sha256(payload).hexdigest(),'constructors_executed':ctors,'jni_registered':len(jni_methods),'native_startup_state':state,'local_license_predicate':license_ok,'address_dependent_feature_predicate':feature_ok,'menu_callback':hex(draw),'missing_offsets':60,'gnu_relro_and_segment_permissions_enforced':True,'license_transport_disabled':True,'network_requests':0,'full_premium_unlocked':False,'android_device_tested':False,'limitations':['JNI and libc are mocked; background threads are not scheduled','No full Android lifecycle, graphics or gameplay tested','Premium address profile remains absent']}
+report={'apk_sha256':hashlib.file_digest(args.apk.open('rb'),'sha256').hexdigest(),'host_sha256':hashlib.sha256(host).hexdigest(),'payload_sha256':hashlib.sha256(payload).hexdigest(),'constructors_executed':ctors,'jni_registered':len(jni_methods),'native_startup_state':state,'deferred_activation_verified':True,'local_license_predicate':license_ok,'address_dependent_feature_predicate':feature_ok,'menu_callback':hex(draw),'missing_offsets':60,'gnu_relro_and_segment_permissions_enforced':True,'license_transport_disabled':True,'network_requests':0,'full_premium_unlocked':False,'android_device_tested':False,'limitations':['JNI and libc are mocked; background threads are not scheduled','No full Android lifecycle, graphics or gameplay tested','Premium address profile remains absent']}
 args.output.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n');print(json.dumps(report,ensure_ascii=False,indent=2))
