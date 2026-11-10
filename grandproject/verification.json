@@ -22,5 +22,15 @@
     "Server integrity behavior after re-signing untested",
     "Native menu text and links remain unchanged",
     "Caption layering over GL requires device verification"
-  ]
+  ],
+  "offline_attempt": {
+    "result": "forced launch success and synthetic premium flags did not unlock premium",
+    "script": "probes/offline_probe.py",
+    "results": "probes/offline-results.json",
+    "state_override_succeeded": true,
+    "draw_callback_changed": false,
+    "synthetic_profiles_rejected": 3,
+    "original_native_constructors_executed": 646,
+    "network_access_performed": false
+  }
 }

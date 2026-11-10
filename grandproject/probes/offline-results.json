@@ -1,0 +1,63 @@
+{
+  "apk_sha256": "5a7a7d388c0fb24578bf23c375abaeb4f175991e28c340ae323c0d34f157a2b2",
+  "original_constructors_executed": 646,
+  "experiment": "isolated ARM64 emulation; original JSON parser and RPC response consumer",
+  "initial_native_state": 0,
+  "patched_native_state": 1,
+  "global_state_override": 1,
+  "original_draw_callback": "0x49fb70",
+  "callback_after_both_overrides": "0x49fb70",
+  "rpc_cases": [
+    {
+      "response": null,
+      "native_return": 0,
+      "output_pointer": "0x0",
+      "output_bytes": 0,
+      "error": "Dev HTTP session required",
+      "simulated_transport_calls": []
+    },
+    {
+      "response": {},
+      "native_return": 0,
+      "output_pointer": "0x0",
+      "output_bytes": 0,
+      "error": "invalid signed Grand+ offset profile",
+      "simulated_transport_calls": [
+        "premium.offsets"
+      ]
+    },
+    {
+      "response": {
+        "enabled": true,
+        "premium": true
+      },
+      "native_return": 0,
+      "output_pointer": "0x0",
+      "output_bytes": 0,
+      "error": "invalid signed Grand+ offset profile",
+      "simulated_transport_calls": [
+        "premium.offsets"
+      ]
+    },
+    {
+      "response": {
+        "profile": "",
+        "signature": ""
+      },
+      "native_return": 0,
+      "output_pointer": "0x0",
+      "output_bytes": 0,
+      "error": "invalid signed Grand+ offset profile",
+      "simulated_transport_calls": [
+        "premium.offsets"
+      ]
+    }
+  ],
+  "network_access_performed": false,
+  "premium_unlocked": false,
+  "limitations": [
+    "No Android device or complete app lifecycle tested",
+    "Synthetic replies do not model every possible server response",
+    "Experiments do not prove that all other bypasses are impossible"
+  ]
+}
