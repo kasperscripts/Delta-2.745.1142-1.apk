@@ -1,0 +1,1 @@
+package android.content; import android.net.Uri; public class Intent { public String action;public Uri uri; public Intent(String a,Uri u){action=a;uri=u;} }

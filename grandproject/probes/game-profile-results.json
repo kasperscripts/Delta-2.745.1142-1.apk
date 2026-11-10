@@ -1,0 +1,44 @@
+{
+  "apk_sha256": "b539753ca745950905f27f2dbbcf4c8508f56d276d4c6ccfabc00faa035a921a",
+  "libgrand_sha256": "eab24307e5dc0dbb714420ebb1131a6eb2aaecd05aab88fa9b891bd1835a85fa",
+  "host_sha256": "5bcf3cc0f690308e249468c91acbdcd208fd3220a4ab0c853f0b2a89e0349224",
+  "payload_sha256": "3e5695a16276269605451e0e9fd2ab7b869096f7387011fe858ec357ed1fb707",
+  "constructors_executed": {
+    "0x20000000": 646,
+    "0x30000000": 3335
+  },
+  "game_protector_constructor_executed": true,
+  "recovered_offsets": 60,
+  "address_extents_and_elf_permissions_verified": true,
+  "bullet_owner_and_data_setters_verified": true,
+  "packet_serializers_bits": [
+    504,
+    544
+  ],
+  "packet_module_installer_succeeded": true,
+  "combat_module_installer_succeeded": true,
+  "nametag_module_installer_succeeded": true,
+  "nametag_scale_callback_verified": true,
+  "nametag_real_scale_and_distance_instrumentation_verified": true,
+  "additional_function_hooks_installed": [
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39
+  ],
+  "license_predicate": 1,
+  "profile_predicate": 1,
+  "android_device_tested": false,
+  "limitations": [
+    "JNI/libc are mocked; background threads are recorded, not scheduled",
+    "Only the game protector constructor is run; game JNI initialization and gameplay are not emulated",
+    "The game load base and ELF metadata are supplied from the actual mapped ELF",
+    "Additional rendering function hooks are installed with a probe callback; only relocation is verified for them"
+  ]
+}

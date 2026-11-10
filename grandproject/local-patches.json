@@ -1,0 +1,142 @@
+[
+  {
+    "kind": "host",
+    "new_segment": "0x88c000",
+    "offset": "0x878000",
+    "first_ctor_original": "0x740000",
+    "last_ctor_wrapper": "0x88c100",
+    "post": "0x88c100",
+    "late_jni_activation": false,
+    "worker": "0x88c800",
+    "rpc": "0x88ca00",
+    "mprotect": "0x742cd0",
+    "patches": [
+      {
+        "address": "0x47a998",
+        "size": 4,
+        "sha256": "802d8cb1d1952d6b70121145f94be6ffe18e86b255580bf628174cb44885d594"
+      },
+      {
+        "address": "0x50f174",
+        "size": 4,
+        "sha256": "6df226fe41a45cd88b09a894612552610ec4f4132c4535ee3d4aa7d647a1a710"
+      },
+      {
+        "address": "0x7fd9a0",
+        "size": 25,
+        "sha256": "e6453f507767bf6a6ec3eb10bc13ea19f2375d3e019f9743a8a51ac3b57c0fcb"
+      },
+      {
+        "address": "0x8783d0",
+        "size": 25,
+        "sha256": "e6453f507767bf6a6ec3eb10bc13ea19f2375d3e019f9743a8a51ac3b57c0fcb"
+      }
+    ],
+    "sha256": "5bcf3cc0f690308e249468c91acbdcd208fd3220a4ab0c853f0b2a89e0349224"
+  },
+  {
+    "kind": "payload",
+    "new_segment": "0x2d8000",
+    "offset": "0x290000",
+    "first_ctor_original": "0x210000",
+    "last_ctor_wrapper": "0x2d8100",
+    "post": "0x2d8100",
+    "late_jni_activation": true,
+    "worker": "0x2d8800",
+    "rpc": "0x2d8a00",
+    "mprotect": "0x2125d0",
+    "patches": [
+      {
+        "address": "0x189938",
+        "size": 4,
+        "sha256": "110f46b5b35c069160560c6ad6786f647dd44e8760a52a46fc22dbbcd7630b91"
+      },
+      {
+        "address": "0x198dc4",
+        "size": 4,
+        "sha256": "110f46b5b35c069160560c6ad6786f647dd44e8760a52a46fc22dbbcd7630b91"
+      },
+      {
+        "address": "0x198f74",
+        "size": 4,
+        "sha256": "110f46b5b35c069160560c6ad6786f647dd44e8760a52a46fc22dbbcd7630b91"
+      },
+      {
+        "address": "0x19a6c4",
+        "size": 8,
+        "sha256": "5103ba3de080c52a046485f800433848701faa49ab8f60241a80987ca249d7ac"
+      },
+      {
+        "address": "0x2cdc80",
+        "size": 480,
+        "sha256": "0ffe3a7ab787dd71d405ec3c5798edc3866d1a48ff7fb29d5f9368d3d2cf84ed"
+      },
+      {
+        "address": "0x2cdc44",
+        "size": 1,
+        "sha256": "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+      },
+      {
+        "address": "0x2cdc48",
+        "size": 1,
+        "sha256": "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+      },
+      {
+        "address": "0x2cdc60",
+        "size": 8,
+        "sha256": "6a69a6cc7473a16302890cd2a9e93e347281f6ea0e1bb784e589753bed0b3324"
+      },
+      {
+        "address": "0x2cda80",
+        "size": 141,
+        "sha256": "77ea612bef3bb99416d71493c99b8a2410f480c612065f8e15a87dd260c473cc"
+      },
+      {
+        "address": "0x2cd990",
+        "size": 8,
+        "sha256": "6a69a6cc7473a16302890cd2a9e93e347281f6ea0e1bb784e589753bed0b3324"
+      },
+      {
+        "address": "0x2cd998",
+        "size": 8,
+        "sha256": "6a69a6cc7473a16302890cd2a9e93e347281f6ea0e1bb784e589753bed0b3324"
+      },
+      {
+        "address": "0x26cdb0",
+        "size": 17,
+        "sha256": "aed45467d04ffc84f76c073e2d9bfbf1027c6d120ef31bbce06c03d8159a1c51"
+      },
+      {
+        "address": "0x26d1a6",
+        "size": 15,
+        "sha256": "3b1537dd8c3e2dfcbad91d400ba057c752c099919a172fbd5434044199e21648"
+      },
+      {
+        "address": "0x26a355",
+        "size": 54,
+        "sha256": "0f764237dfd88a420615cc85de83cfddd469bb25c8720e105689662a045fd5c5"
+      },
+      {
+        "address": "0x26ae58",
+        "size": 28,
+        "sha256": "1370d1acb6f4d4e41c17c75bde30dc6ed5b85f7009f84fd8b7147e6675f7a050"
+      },
+      {
+        "address": "0x283fa2",
+        "size": 19,
+        "sha256": "029c9f9ff5d48ae41108cea24e1ba6d27fa9e627c9005ed5470fa0b9bbdd43a4"
+      },
+      {
+        "address": "0x28fe48",
+        "size": 32,
+        "sha256": "b7803bd39deb575733108fecbccf10fa9dc407c86d4e73ae0fc8b998bfeed151"
+      },
+      {
+        "address": "0x290ffd",
+        "size": 32,
+        "sha256": "b7803bd39deb575733108fecbccf10fa9dc407c86d4e73ae0fc8b998bfeed151"
+      }
+    ],
+    "sha256": "3e5695a16276269605451e0e9fd2ab7b869096f7387011fe858ec357ed1fb707"
+  }
+]

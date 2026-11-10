@@ -1,0 +1,15 @@
+{
+  "file": "GrandProject_6231_Icon_Crack_IC3_test.apk",
+  "size": 407625789,
+  "sha256": "b539753ca745950905f27f2dbbcf4c8508f56d276d4c6ccfabc00faa035a921a",
+  "zip_crc_valid": true,
+  "native_libraries_stored": true,
+  "dex_native_sources_match": true,
+  "android_device_tested": false,
+  "address_profile_entries": 60,
+  "local_premium_profile_enabled": true,
+  "signatures_v2_v3_verified": true,
+  "zipalign_16kb_verified": true,
+  "telegram_helper_cases_passed": 8,
+  "deferred_native_activation_verified": true
+}

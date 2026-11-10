@@ -1,0 +1,15 @@
+{
+  "file": "GrandProject_6231_Icon_Crack_IC2_test.apk",
+  "size": 407625789,
+  "sha256": "fcf1ce2518487ce0c57f2e56d34ddd550029e6d79f5304a4f24d2a7e91c368c0",
+  "zip_crc_valid": true,
+  "native_libraries_stored": true,
+  "dex_native_sources_match": true,
+  "android_device_tested": false,
+  "full_premium_unlocked": false,
+  "signatures_v2_v3_verified": true,
+  "zipalign_16kb_verified": true,
+  "telegram_helper_cases_passed": 8,
+  "telegram_once_scope": "installation; durable commit before intent",
+  "deferred_native_activation_verified": true
+}
