@@ -1,7 +1,7 @@
 .class public final Lcom/iconcrack/Branding;
 .super Ljava/lang/Object;
 
-# Draft branding only. This class does not grant premium access.
+# Telegram launch and Android caption; native licensing is handled separately.
 .method public static openTelegram(Landroid/app/Activity;)V
     .locals 3
 

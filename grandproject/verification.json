@@ -1,36 +1,60 @@
 {
-  "status": "incomplete-source-draft-no-installable-apk",
+  "status": "experimental-installable-local-bootstrap-full-premium-incomplete",
   "input_apk_sha256": "5a7a7d388c0fb24578bf23c375abaeb4f175991e28c340ae323c0d34f157a2b2",
-  "draft_classes6_sha256": "322828e4c8fc345ccbed0b5a0144bd7cc5afd023fc35ec8a59b047cb8b47cd61",
-  "draft_classes6_bytes": 90356,
-  "checks": {
-    "smali_assembled_with": "Apktool 2.12.1",
-    "dex_decompiled_with": "JADX 1.5.3",
-    "startup_hook_present": true,
-    "saved_state_guard_present": true,
-    "telegram_uri_present": true,
-    "main_activity_caption_hook_present": true
+  "output_file": "GrandProject_6231_Icon_Crack_IC1_test.apk",
+  "output": {
+    "size": 407617597,
+    "sha256": "5fa7218c3be9a661d3a22ac3b61879662464310610b006cd42994ce4bef6e458",
+    "zip_crc_valid": true,
+    "native_libraries_stored": 24,
+    "dex_replacement_matches": true
   },
-  "premium_unlocked": false,
-  "server_requests_performed": false,
+  "native_bootstrap": {
+    "apk_sha256": "5fa7218c3be9a661d3a22ac3b61879662464310610b006cd42994ce4bef6e458",
+    "host_sha256": "76c28f4a550f32ec82e035b6f1853f4974cca354eb5fbe6ff6cbf2ef86f2cc91",
+    "payload_sha256": "6c1eb5df829c816e722961fb8ea7d3c632de27da9dfcf5d7e7c7b97b91ea3741",
+    "constructors_executed": {
+      "0x20000000": 646,
+      "0x30000000": 3335
+    },
+    "jni_registered": 21,
+    "native_startup_state": 1,
+    "local_license_predicate": 1,
+    "address_dependent_feature_predicate": 0,
+    "menu_callback": "0x301ad55c",
+    "missing_offsets": 60,
+    "gnu_relro_and_segment_permissions_enforced": true,
+    "license_transport_disabled": true,
+    "network_requests": 0,
+    "full_premium_unlocked": false,
+    "android_device_tested": false,
+    "limitations": [
+      "JNI and libc are mocked; background threads are not scheduled",
+      "No full Android lifecycle, graphics or gameplay tested",
+      "Premium address profile remains absent"
+    ]
+  },
+  "checks": {
+    "signature_v2_valid": true,
+    "signature_v3_valid": true,
+    "zipalign_16kb_valid": true,
+    "manifest_extractNativeLibs": true,
+    "manifest_pageSizeCompat": true,
+    "dex_assembled": "Apktool 2.12.1",
+    "dex_reviewed": "JADX 1.5.3",
+    "telegram_on_launch_once": true,
+    "native_menu_branding_patched": true,
+    "gnu_relro_enforced_in_native_probe": true
+  },
+  "free_module_retrieval_performed": true,
+  "premium_endpoint_requested": false,
   "apk_install_tested": false,
   "device_ui_tested": false,
-  "native_module_premium_profile_available": false,
+  "full_premium_unlocked": false,
   "limitations": [
-    "Downloaded module not available for inspection",
-    "Signed premium.offsets data not available",
-    "Server integrity behavior after re-signing untested",
-    "Native menu text and links remain unchanged",
-    "Caption layering over GL requires device verification"
-  ],
-  "offline_attempt": {
-    "result": "forced launch success and synthetic premium flags did not unlock premium",
-    "script": "probes/offline_probe.py",
-    "results": "probes/offline-results.json",
-    "state_override_succeeded": true,
-    "draw_callback_changed": false,
-    "synthetic_profiles_rejected": 3,
-    "original_native_constructors_executed": 646,
-    "network_access_performed": false
-  }
+    "Premium address table has 60 unresolved entries",
+    "Original address-profile feature guard is retained",
+    "JNI and libc are mocked in native tests; background workers are not scheduled",
+    "Android installation, rendering and gameplay require device verification"
+  ]
 }
