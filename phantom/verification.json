@@ -1,24 +1,42 @@
 {
   "phantom": {
-    "file": "Phantom_Icon_Crack.apk",
-    "size": 5510328,
-    "sha256": "ad55f0478e63b2044ec4e461df826a7a8e44664c3aa632413a7a6f96e540d84c",
-    "original_sha256": "5d9cb8cb27b5e1f41b1b570003429dcfa467f713e5e9c974442ec9d89959423f",
+    "file": "Phantom_Icon_Crack_v2.apk",
+    "size": 5506232,
+    "sha256": "e0a7f12392f8f2f80d6aca150d5286aeffdbd15300b895dbbb9a741fff6ceeb4",
     "zip_crc_valid": true,
-    "drama_matches_utf8_utf16": 0,
-    "entries_scanned": 16,
-    "changed_entries": [
+    "changed_entries_from_v1": [
+      "assets/bootstrap.bin",
       "classes.dex",
-      "AndroidManifest.xml"
+      "lib/arm64-v8a/liboxide_auth_bootstrap.so"
     ],
+    "central_watermark_removed": true,
+    "center_credit_method_in_actual_dex": "return-void",
+    "internal_menu_credit": "cracked by @Icon_Crack",
     "key": "@Icon_Crack",
-    "key_validator_cases_passed": 7,
-    "key_and_caption_confirmed_in_decompiled_dex": true,
-    "certificate_pin_matches_actual_signer": true,
+    "launcher_main_activity_unchanged_from_v1": true,
+    "key_validation_unchanged_from_v1_seven_tested_cases": true,
+    "bootstrap_size": 3502384,
+    "bootstrap_sha256": "63940b2d5b45bc39bbe19eb191a6e0a27d7cb9a6a72f3e973b32a7c804ed1b18",
+    "bootstrap_cache_size_and_sha256_match": true,
+    "internal_ui_dex_sha256": "a0cef2b7f77d4b5b6af128e0bdb46bf6cdf60bb853ea6d0399d3ca7e2f24be58",
+    "internal_ui_dex_size": 447620,
+    "internal_ui_decrypted_from_final_bundle": true,
+    "internal_ui_no_drama_strings": true,
+    "native_package_signature_and_runtime_decryption_emulated": true,
+    "actual_native_ed25519_valid_accepted_tampered_rejected": true,
+    "actual_native_ui_aead_decryption_emulated": true,
+    "auth_library_changes": "32 bytes of public trust-key data only",
+    "auth_library_sha256": "7b7a4c3a0982bbf6a359febde3e3bf18c9668a9265a8c27cbedb22631db9173a",
+    "encrypted_native_payload_unchanged_from_v1": true,
+    "decrypted_native_payload_sha256": "4c7ac49131a2b3aa2942fb08d6e903339714d161dd9862e95fc54e30048a7af5",
+    "menu_logo_unchanged": true,
+    "other_four_native_libraries_unchanged": true,
+    "android_manifest_unchanged_from_v1": true,
     "signer_certificate_sha256": "5fe9cea48690773d6fe2d2b3234cdc5da67ebf2e6caddaba338755d0166fb0e3",
     "signatures_v2_v3_verified": true,
     "zipalign_16kb_verified": true,
-    "all_native_libraries_and_bootstrap_unchanged": true
+    "same_signer_as_v1": true,
+    "root_and_nonroot_loading_fixes_included": false
   },
   "lulubox": {
     "file": "LuluBoxSuper_2.1.2.apk",
@@ -33,5 +51,6 @@
     "signatures_v1_v2_v3_verified": true,
     "decompiled_smali_files_scanned": 19659
   },
-  "android_device_tested": false
+  "android_device_tested": false,
+  "verification_limits": "Native emulation covered bootstrap signature verification, runtime decryption and internal UI decryption. Android UI rendering and game launch were not run."
 }

@@ -1,0 +1,37 @@
+{
+  "phantom": {
+    "file": "Phantom_Icon_Crack.apk",
+    "size": 5510328,
+    "sha256": "ad55f0478e63b2044ec4e461df826a7a8e44664c3aa632413a7a6f96e540d84c",
+    "original_sha256": "5d9cb8cb27b5e1f41b1b570003429dcfa467f713e5e9c974442ec9d89959423f",
+    "zip_crc_valid": true,
+    "drama_matches_utf8_utf16": 0,
+    "entries_scanned": 16,
+    "changed_entries": [
+      "classes.dex",
+      "AndroidManifest.xml"
+    ],
+    "key": "@Icon_Crack",
+    "key_validator_cases_passed": 7,
+    "key_and_caption_confirmed_in_decompiled_dex": true,
+    "certificate_pin_matches_actual_signer": true,
+    "signer_certificate_sha256": "5fe9cea48690773d6fe2d2b3234cdc5da67ebf2e6caddaba338755d0166fb0e3",
+    "signatures_v2_v3_verified": true,
+    "zipalign_16kb_verified": true,
+    "all_native_libraries_and_bootstrap_unchanged": true
+  },
+  "lulubox": {
+    "file": "LuluBoxSuper_2.1.2.apk",
+    "size": 38011724,
+    "sha256": "bd8c7af68152a7661d1880d89ab45f1721da0d9b5b521ba158607aec56d662fe",
+    "original_sha256": "bd8c7af68152a7661d1880d89ab45f1721da0d9b5b521ba158607aec56d662fe",
+    "zip_crc_valid": true,
+    "drama_matches_utf8_utf16": 0,
+    "entries_scanned": 992,
+    "changed_entries": [],
+    "byte_identical_to_input": true,
+    "signatures_v1_v2_v3_verified": true,
+    "decompiled_smali_files_scanned": 19659
+  },
+  "android_device_tested": false
+}

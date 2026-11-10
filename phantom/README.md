@@ -1,47 +1,42 @@
-# Phantom — @Icon_Crack
+# Phantom — @Icon_Crack v2
 
-В Phantom заменены подпись и локальный ключ `@DramaDLC` на **`@Icon_Crack`**. Подпись интерфейса: `cracked by @Icon_Crack`. Поле ввода показывает новый ключ.
+В **v2 удалена отдельная надпись по центру экрана**. В меню и лаунчере остаётся `cracked by @Icon_Crack`; ключ — **`@Icon_Crack`**.
 
-- [Скачать Phantom_Icon_Crack.apk](https://github.com/kasperscripts/Delta-2.745.1142-1.apk/raw/refs/tags/phantom-icon-crack-v1/artifacts/Phantom_Icon_Crack.apk)
-- [Скачать LuluBoxSuper_2.1.2.apk](https://github.com/kasperscripts/Delta-2.745.1142-1.apk/raw/refs/tags/phantom-icon-crack-v1/artifacts/LuluBoxSuper_2.1.2.apk)
-- [Выпуск на GitHub](https://github.com/kasperscripts/Delta-2.745.1142-1.apk/releases/tag/phantom-icon-crack-v1)
+- [Скачать Phantom_Icon_Crack_v2.apk](https://github.com/kasperscripts/Delta-2.745.1142-1.apk/raw/refs/tags/phantom-icon-crack-v2/artifacts/Phantom_Icon_Crack_v2.apk)
+- [Выпуск v2 на GitHub](https://github.com/kasperscripts/Delta-2.745.1142-1.apk/releases/tag/phantom-icon-crack-v2)
+- [LuluBoxSuper_2.1.2.apk](https://github.com/kasperscripts/Delta-2.745.1142-1.apk/raw/refs/tags/phantom-icon-crack-v1/artifacts/LuluBoxSuper_2.1.2.apk) — без изменений, повторно скачивать не требуется.
 
-В Phantom обнаружена настоящая локальная проверка ключа: сравнение строки после `trim()`. Теперь `@Icon_Crack` проходит, старый ключ не проходит; регистр учитывается. Ожидаемый SHA-256 сертификата в проверке запуска обновлён под сертификат новой APK. Сама проверка сертификата сохранена.
+Сборка v2 подписана тем же сертификатом, что и Icon v1: её можно устанавливать поверх v1. Если установлена исходная сборка с другим сертификатом, Android потребует удалить её; при удалении теряются данные приложения.
 
-Из-за смены сертификата **перед установкой новой версии нужно удалить старый Phantom**, в том числе его старую установленную копию внутри виртуальной среды, если она используется. При удалении приложения Android удаляет его данные.
+## Откуда появлялась надпись
 
-В LuluBox упоминаний DramaDLC не обнаружено: проверены все 992 записи APK и 19 659 распакованных smali-файлов. Этот APK опубликован побайтно без изменений, с исходной подписью.
+В v1 были заменены строки внешнего лаунчера. Центральная надпись находилась во втором DEX внутри зашифрованного `assets/bootstrap.bin`.
 
-## Проверки
+`InternalUI` подключает меню к окну игры и создаёт `dev.phantom.i.Y`. Его конструктор вызывал `addScreenCredit()`, который добавлял `TextView` с `-crack by @DramaDLC`, размещением `CENTER` и смещением вниз на 24 dp. Теперь этот метод сразу возвращает управление, не создавая элемента. В отдельном `addMenuCredit()` подпись заменена на `cracked by @Icon_Crack`.
 
-- В подписанном Phantom нет прямых упоминаний Drama в UTF-8 и UTF-16, без учёта регистра. Подпись и новый ключ подтверждены декомпиляцией фактически собранного DEX.
-- Изменённый метод проверки ключа извлечён из DEX через JADX и исполнен в JVM с заглушкой EditText: **7 случаев**. Проверены новый/старый ключ, пробелы по краям, другой регистр, пустая/случайная строка и отсутствие поля.
-- Встроенный отпечаток сертификата совпадает с реальным сертификатом подписанной APK.
-- Подписи Phantom v2/v3 и LuluBox v1/v2/v3 проверены официальным apksigner. CRC обоих ZIP корректны.
-- Только `classes.dex` и параметры совместимости `AndroidManifest.xml` Phantom изменены среди исходных записей, кроме подписей. Все пять native-библиотек, `assets/bootstrap.bin` и ресурсы сохранены побайтно.
-- Native-библиотеки Phantom упакованы без сжатия, APK выровнен `zipalign -P 16`; включены `extractNativeLibs` и `pageSizeCompat`.
+## Изменения и проверки
 
-**На Android-устройстве запуск, Root/LuluBox/PHvirtual и игровой процесс не проверены.** Нативный модуль и формат bootstrap не менялись. Сканирование содержимого не заменяет проверку интерфейса загружаемого модуля во время игры.
+Относительно Icon v1 изменены ровно три записи APK:
 
-Отчёт с размерами и SHA-256: [verification.json](verification.json). Контрольные суммы: [SHA256SUMS](SHA256SUMS).
+- `assets/bootstrap.bin`: обновлён внутренний DEX меню; зашифрованный нативный модуль и PNG сохранены.
+- `lib/arm64-v8a/liboxide_auth_bootstrap.so`: заменены только 32 байта данных открытого ключа для подписи обновлённого пакета. Машинные инструкции проверки сохранены.
+- `classes.dex`: обновлены размер и SHA-256 пакета в проверке кэша, чтобы старая копия автоматически заменялась. `MainActivity`, включая ключ и проверку сертификата, совпадает с v1.
 
-Phantom: пакет `dev.secret.oxide`, versionCode 86, versionName `3.5.66-hardened`, minSdk 24, targetSdk 35, arm64-v8a. LuluBox: пакет `com.lulu.luluboxsuper`, versionCode 212, versionName `2.1.2`, minSdk 21, targetSdk 28, arm64-v8a / armeabi-v7a.
+Проверены фактические DEX из собранных данных: метод центральной подписи пуст, подпись меню обновлена. В ARM64-эмуляции исполнены проверка Ed25519 и расшифровка пакета, а также расшифровка внутреннего UI исходной нативной функцией. Корректная подпись принимается; изменение одного байта отклоняется. Расшифрованный нативный модуль и логотип совпадают с исходными.
 
-## Повторная сборка
+Подписи APK v2/v3, сертификат, CRC ZIP и выравнивание `zipalign -P 16` проверены. Manifest и остальные четыре нативные библиотеки совпадают с Icon v1. Ключ проверяется после `trim()` с учётом регистра; семь проверок v1 относятся к сохранённому без изменений методу.
 
-Исходный Phantom SHA-256: `5d9cb8cb27b5e1f41b1b570003429dcfa467f713e5e9c974442ec9d89959423f`.
+**Запуск на Android-устройстве и отображение поверх игры не проверены.** Исправления ранее обсуждавшихся ошибок Root/Non-root в этот выпуск не входят.
 
-Нужны Java, Python 3, Apktool 2.12.1 и Android Build Tools 36.1.0. Из корня репозитория:
+Отчёт: [verification.json](verification.json). Контрольные суммы: [SHA256SUMS](SHA256SUMS). Архив отчёта v1: [verification-v1.json](verification-v1.json); его сканирование прямых строк не охватывало зашифрованный UI.
 
-```sh
-java -jar apktool.jar d -o work/phantom original.apk
-python3 phantom/prepare_branding.py work/phantom/smali --certificate-sha256 YOUR_CERTIFICATE_SHA256
-java -jar apktool.jar b work/phantom -o work/rebuilt.apk
-python3 phantom/repack.py original.apk work/phantom/build/apk/classes.dex work/unsigned.apk
-zipalign -P 16 -f 4 work/unsigned.apk work/aligned.apk
-apksigner sign --ks YOUR_KEYSTORE --min-sdk-version 24 --v2-signing-enabled true --v3-signing-enabled true --out work/Phantom_Icon_Crack.apk work/aligned.apk
-apksigner verify --verbose work/Phantom_Icon_Crack.apk
-zipalign -c -P 16 4 work/Phantom_Icon_Crack.apk
-```
+## Материалы сборки
 
-Укажите SHA-256 именно сертификата выбранного ключа подписи. Приватный ключ и пароль сборки не публикуются. Скрипт подготовки проверен на свежей распаковке: он воспроизводит smali, из которого собран опубликованный DEX.
+`prepare_branding.py` и `repack.py` сохраняют процесс сборки v1. Для исправления v2 добавлены:
+
+- `remove_screen_credit.py`: правка распакованного smali внутреннего UI и проверки кэша внешнего DEX.
+- `repack_overlay.py`: упаковка Icon v1 с подготовленными внешним DEX, новым `bootstrap.bin` и соответствующей auth-библиотекой. Входные хеши проверяются. Затем нужны `zipalign -P 16` и подпись APK.
+
+Контейнер `bootstrap.bin`: `OXB5`, версия и две длины (big endian), блок `OXN1`, блок `OXA4`, подпись Ed25519 (64 байта). Блоки используют XChaCha20-Poly1305 с четырёхбайтовым magic в качестве AAD. Расшифрованный `OXA4` содержит две длины (big endian), DEX и PNG. Открытый ключ обновлённого контейнера указан в [overlay-build.json](overlay-build.json); приватные ключи и пароли не публикуются. Добавленные скрипты не автоматизируют весь цикл расшифровки и подписи контейнера.
+
+Phantom: пакет `dev.secret.oxide`, versionCode 86, versionName `3.5.66-hardened`, minSdk 24, targetSdk 35, arm64-v8a. LuluBox остаётся исходным APK с SHA-256 `bd8c7af68152a7661d1880d89ab45f1721da0d9b5b521ba158607aec56d662fe`.

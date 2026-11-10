@@ -114,4 +114,4 @@ work/build-tools/zipalign -c -P 16 4 work/Android16.apk
 GrandProject: [GrandProject IC3](grandproject/README.md) — локальная загрузка, профиль премиума из 60 адресов и однократный переход в Telegram. Игровой запуск на устройстве ещё не проверен.
 
 
-Phantom: [@Icon_Crack и LuluBox 2.1.2](phantom/README.md) — заменены подпись и локальный ключ Phantom; LuluBox приложен с исходной подписью.
+Phantom: [@Icon_Crack v2 и LuluBox 2.1.2](phantom/README.md) — удалена центральная надпись из внутреннего меню, сохранён ключ `@Icon_Crack`; LuluBox без изменений.
