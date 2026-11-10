@@ -1,0 +1,32 @@
+{
+  "status": "compatibility_build_pending_device_install_test",
+  "reported_device": "CMF Phone 2 Pro",
+  "reported_android_version": 16,
+  "reported_old_install_error": "Package invalid or corrupted",
+  "root_cause": "Not reproduced; old APK passes SDK 36 signature, alignment and ZIP checks",
+  "apk": "Delta-2.745.1142-1-Icon_Crack-Android16.apk",
+  "sha256": "61179782ecd61a21190c63b14fb4756f7b820180dae8c5313b4565b788cfea1d",
+  "size_bytes": 238412420,
+  "build_tools_version": "36.1.0",
+  "signature_verified_sdk_range": [
+    26,
+    36
+  ],
+  "signatures": [
+    "v1",
+    "v2",
+    "v3"
+  ],
+  "certificate_sha256": "5fe9cea48690773d6fe2d2b3234cdc5da67ebf2e6caddaba338755d0166fb0e3",
+  "signing_key": "RSA 3072; private material not published",
+  "native_libraries_compression": "stored, uncompressed",
+  "native_libraries_zip_alignment_bytes": 16384,
+  "manifest_attributes": {
+    "extractNativeLibs": true,
+    "pageSizeCompat": true
+  },
+  "comparison_to_fixed_key_build": "All non-signature file contents unchanged except AndroidManifest.xml; manifest semantics differ only in the two listed attributes",
+  "fixed_key": "@Icon_Crack",
+  "fixed_key_native_and_dex_byte_identical_to_tested_build": true,
+  "android_device_tested": false
+}

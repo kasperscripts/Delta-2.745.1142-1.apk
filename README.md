@@ -2,9 +2,17 @@
 
 Ключ **`@Icon_Crack`** принимается локально, без обращения к серверу и без проверки срока действия. Регистр имеет значение. Остальные ключи проходят исходную проверку.
 
-[**Скачать APK**](https://github.com/kasperscripts/Delta-2.745.1142-1.apk/raw/refs/heads/main/artifacts/Delta-2.745.1142-1-Icon_Crack-fixed-key.apk)
+[**Скачать вариант для Android 16**](https://github.com/kasperscripts/Delta-2.745.1142-1.apk/raw/refs/heads/main/artifacts/Delta-2.745.1142-1-Icon_Crack-Android16.apk)
 
 Предыдущая сборка `branding-only` меняла только ссылки и подпись. В новой сборке `fixed-key` изменена сама проверка ключа. APK хранится в `artifacts/` через Git LFS.
+
+## Вариант Android 16
+
+После сообщения об отказе установки на CMF Phone 2 Pro / Android 16 подготовлен отдельный вариант упаковки. Точная причина отказа на телефоне пока не подтверждена: предыдущий файл проходит проверки подписи, ZIP и выравнивания SDK 36.
+
+Новый вариант собирается Android Build Tools 36.1.0: все нативные библиотеки хранятся без сжатия и выровнены в APK на 16 КБ. В манифесте явно включены `extractNativeLibs` и `pageSizeCompat`; используется новый сертификат RSA 3072. Содержимое DEX и нативных библиотек совпадает с проверенной сборкой `fixed-key`, поэтому логика ключа не менялась.
+
+Проверены подписи для API 26–36, чтение манифеста инструментами Android 16 и выравнивание всех библиотек. **Установка на CMF Phone 2 Pro ещё требует повторной проверки пользователем.** Подробности: `android16-verification.json`.
 
 ## Изменения
 
@@ -75,3 +83,17 @@ work/test-key-vm work/vm-tests
 ```
 
 Тесты извлекают функции из изменённой нативной библиотеки и выполняют их байткод в Luau VM с заменой сетевого обработчика на тестовый. Остальные прототипы меню сохраняются без изменения машинных инструкций.
+
+## Перепаковка для Android 16
+
+После сборки APK с фиксированным ключом используйте `android16_compat.py`, `zipalign` и `apksigner` из официального Android Build Tools 36.1.0. Пример с собственным ключом подписи:
+
+```sh
+python3 android16_compat.py work/fixed-key-unsigned.apk work/android16-unsigned.apk
+work/build-tools/zipalign -P 16 -f 4 work/android16-unsigned.apk work/android16-aligned.apk
+work/build-tools/apksigner sign --ks work/release.p12 --ks-key-alias icon-crack --min-sdk-version 26 --v1-signing-enabled true --v2-signing-enabled true --v3-signing-enabled true --v4-signing-enabled false --out work/Android16.apk work/android16-aligned.apk
+work/build-tools/apksigner verify --verbose --min-sdk-version 26 --max-sdk-version 36 work/Android16.apk
+work/build-tools/zipalign -c -P 16 4 work/Android16.apk
+```
+
+Пароль ключа вводится локально при подписании. Приватный ключ сборки в репозитории отсутствует.

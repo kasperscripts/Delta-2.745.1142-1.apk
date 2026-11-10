@@ -6,3 +6,4 @@ output/
 *.keystore
 *.jks
 __pycache__/
+*.p12
