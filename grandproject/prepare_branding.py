@@ -78,9 +78,12 @@ app=ROOT/'com/grand/flutter/GrandMobileApp.smali';a=app.read_text();marker='''  
 ''';assert a.count(marker)==1;a=a.replace(marker,'',1);app.write_text(a)
 main=ROOT/'com/grand/flutter/MainActivity.smali';a=main.read_text();marker='    invoke-static {p0}, Lcom/grand/flutter/ImGuiOverlay;->start(Landroid/app/Activity;)V';assert a.count(marker)==1;main.write_text(a.replace(marker,marker+'\n    invoke-static {p0}, Lcom/iconcrack/Branding;->attachCaption(Landroid/app/Activity;)V'))
 
-marker='    const-string v0, "grand"\n\n    invoke-static {v0}, Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V'
-a=main.read_text();assert a.count(marker)==1
-main.write_text(a.replace(marker,marker+'\n\n    const-string v0, "iconpayload"\n\n    invoke-static {v0}, Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V',1))
+a=main.read_text()
+start=a.index('    const-string v0, "grand"')
+marker='    invoke-static {v0}, Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V'
+end=a.index(marker,start)+len(marker)
+a=a[:end]+'\n\n    const-string v0, "iconpayload"\n    invoke-static {v0}, Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V'+a[end:]
+main.write_text(a)
 helper=ROOT/'com/iconcrack/Branding.smali';helper.parent.mkdir(parents=True,exist_ok=True)
 shutil.copyfile(Path(__file__).resolve().parent/'smali/com/iconcrack/Branding.smali',helper)
 print('Prepared persistent Telegram mark and deferred native activation.')
