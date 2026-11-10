@@ -1,7 +1,7 @@
 {
-  "apk_sha256": "fcf1ce2518487ce0c57f2e56d34ddd550029e6d79f5304a4f24d2a7e91c368c0",
+  "apk_sha256": "b539753ca745950905f27f2dbbcf4c8508f56d276d4c6ccfabc00faa035a921a",
   "host_sha256": "5bcf3cc0f690308e249468c91acbdcd208fd3220a4ab0c853f0b2a89e0349224",
-  "payload_sha256": "094252b1622d90b2a0d4085a6742fa8da3e4d9cfaecbf601bc22660a0dae3ee5",
+  "payload_sha256": "3e5695a16276269605451e0e9fd2ab7b869096f7387011fe858ec357ed1fb707",
   "constructors_executed": {
     "0x20000000": 646,
     "0x30000000": 3335
@@ -10,17 +10,17 @@
   "native_startup_state": 1,
   "deferred_activation_verified": true,
   "local_license_predicate": 1,
-  "address_dependent_feature_predicate": 0,
+  "address_dependent_feature_predicate": 1,
   "menu_callback": "0x301ad55c",
-  "missing_offsets": 60,
+  "missing_offsets": 0,
   "gnu_relro_and_segment_permissions_enforced": true,
   "license_transport_disabled": true,
   "network_requests": 0,
-  "full_premium_unlocked": false,
+  "local_premium_profile_enabled": true,
   "android_device_tested": false,
   "limitations": [
     "JNI and libc are mocked; background threads are not scheduled",
     "No full Android lifecycle, graphics or gameplay tested",
-    "Premium address profile remains absent"
+    "Address semantics and gameplay require separate validation"
   ]
 }

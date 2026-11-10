@@ -1,4 +1,4 @@
-"""Create a local module bootstrap and bypass the license predicate for one exact build; keep the address-profile guard."""
+"""Create a local module bootstrap and bypass the license predicate for one exact build; install the recovered local address profile."""
 import io,struct,hashlib,ctypes,ctypes.util,json,sys
 from pathlib import Path
 from elftools.elf.elffile import ELFFile
@@ -101,7 +101,15 @@ def patch(raw,kind):
   for a in [0x189938,0x198dc4,0x198f74]:asm(a,'ret')
   # Local license predicate used by the menu. The address-profile predicate is retained.
   for a in [0x19a6c4]:asm(a,'mov w0,#1;ret')
-  # Local profile uses no server token. Offsets are left absent, not fabricated.
+  # Exact-build local address table. Original resolver and lease predicates remain intact.
+  local=json.loads((R/'offset-profile.json').read_text())
+  entries=local['entries'];assert len(entries)==60 and [e['index'] for e in entries]==list(range(60))
+  values=[int(e['value'],16) for e in entries]
+  assert all(values)
+  put(0x2cdc80,struct.pack('<60Q',*values))
+  for flag in [0x2cdc44,0x2cdc48]:put(flag,b'\x01')
+  put(0x2cdc60,struct.pack('<Q',0x7fffffffffffffff))
+  # Local profile uses no server token.
   profile=bytearray(0x8d)
   for i,value in enumerate(['@Icon_Crack','@Icon_Crack','','','']):profile[i*24:(i+1)*24]=sso(value)
   struct.pack_into('<Q',profile,0x78,4102444800000)

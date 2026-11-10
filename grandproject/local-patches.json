@@ -67,6 +67,26 @@
         "sha256": "5103ba3de080c52a046485f800433848701faa49ab8f60241a80987ca249d7ac"
       },
       {
+        "address": "0x2cdc80",
+        "size": 480,
+        "sha256": "0ffe3a7ab787dd71d405ec3c5798edc3866d1a48ff7fb29d5f9368d3d2cf84ed"
+      },
+      {
+        "address": "0x2cdc44",
+        "size": 1,
+        "sha256": "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+      },
+      {
+        "address": "0x2cdc48",
+        "size": 1,
+        "sha256": "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+      },
+      {
+        "address": "0x2cdc60",
+        "size": 8,
+        "sha256": "6a69a6cc7473a16302890cd2a9e93e347281f6ea0e1bb784e589753bed0b3324"
+      },
+      {
         "address": "0x2cda80",
         "size": 141,
         "sha256": "77ea612bef3bb99416d71493c99b8a2410f480c612065f8e15a87dd260c473cc"
@@ -117,6 +137,6 @@
         "sha256": "b7803bd39deb575733108fecbccf10fa9dc407c86d4e73ae0fc8b998bfeed151"
       }
     ],
-    "sha256": "094252b1622d90b2a0d4085a6742fa8da3e4d9cfaecbf601bc22660a0dae3ee5"
+    "sha256": "3e5695a16276269605451e0e9fd2ab7b869096f7387011fe858ec357ed1fb707"
   }
 ]
