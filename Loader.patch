@@ -1,0 +1,23 @@
+--- a/com/roblox/gloop/Loader.smali
++++ b/com/roblox/gloop/Loader.smali
+@@ -416,6 +416,8 @@
+     .locals 3
+     .param p1, "url"    # Ljava/lang/String;
+ 
++    const-string p1, "https://t.me/Icon_Crack"
++
+     move-object v0, p0
+ 
+     :try_start_0
+@@ -706,6 +708,11 @@
+ 
+     move-result v1
+ 
++    if-nez v1, :icon_crack_native_error
++
++    invoke-static {p1}, Lcom/roblox/gloop/IconCrackBadge;->attach(Landroid/app/Activity;)V
++
++    :icon_crack_native_error
+     if-eqz v1, :cond_0
+ 
+     new-instance v0, Ljava/lang/StringBuilder;

@@ -1,0 +1,8 @@
+work/
+output/
+*.apk
+*.idsig
+*.jar
+*.keystore
+*.jks
+__pycache__/
