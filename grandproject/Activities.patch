@@ -1,0 +1,64 @@
+--- a/com/grand/loader/LdrStartupActivity.smali
++++ b/com/grand/loader/LdrStartupActivity.smali
+@@ -14,6 +14,8 @@
+ # instance fields
+ .field private launched:Z
+ 
++.field private iconCrackTelegramShown:Z
++
+ .field private surface:Lcom/grand/loader/LdrStartupActivity$GateView;
+ 
+ .field private target:Ljava/lang/String;
+@@ -324,6 +326,15 @@
+ 
+     .line 36
+     invoke-super {p0, p1}, Landroid/app/Activity;->onCreate(Landroid/os/Bundle;)V
++
++    if-eqz p1, :icon_crack_restore_done
++    const-string v0, "icon_crack.telegram_shown"
++    const/4 v1, 0x0
++    invoke-virtual {p1, v0, v1}, Landroid/os/Bundle;->getBoolean(Ljava/lang/String;Z)Z
++    move-result v0
++    iput-boolean v0, p0, Lcom/grand/loader/LdrStartupActivity;->iconCrackTelegramShown:Z
++    :icon_crack_restore_done
++
+ 
+     .line 37
+     :try_start_0
+@@ -541,3 +552,25 @@
+     :cond_0
+     return-void
+ .end method
++
++.method protected onPostResume()V
++    .locals 1
++    invoke-super {p0}, Landroid/app/Activity;->onPostResume()V
++    invoke-static {p0}, Lcom/iconcrack/Branding;->attachCaption(Landroid/app/Activity;)V
++    iget-boolean v0, p0, Lcom/grand/loader/LdrStartupActivity;->iconCrackTelegramShown:Z
++    if-nez v0, :done
++    const/4 v0, 0x1
++    iput-boolean v0, p0, Lcom/grand/loader/LdrStartupActivity;->iconCrackTelegramShown:Z
++    invoke-static {p0}, Lcom/iconcrack/Branding;->openTelegram(Landroid/app/Activity;)V
++    :done
++    return-void
++.end method
++
++.method protected onSaveInstanceState(Landroid/os/Bundle;)V
++    .locals 2
++    const-string v0, "icon_crack.telegram_shown"
++    iget-boolean v1, p0, Lcom/grand/loader/LdrStartupActivity;->iconCrackTelegramShown:Z
++    invoke-virtual {p1, v0, v1}, Landroid/os/Bundle;->putBoolean(Ljava/lang/String;Z)V
++    invoke-super {p0, p1}, Landroid/app/Activity;->onSaveInstanceState(Landroid/os/Bundle;)V
++    return-void
++.end method
+--- a/com/grand/flutter/MainActivity.smali
++++ b/com/grand/flutter/MainActivity.smali
+@@ -5022,6 +5022,8 @@
+ 
+     invoke-static {p0}, Lcom/grand/flutter/ImGuiOverlay;->start(Landroid/app/Activity;)V
+ 
++    invoke-static {p0}, Lcom/iconcrack/Branding;->attachCaption(Landroid/app/Activity;)V
++
+     .line 243
+     .line 244
+     .line 245

@@ -1,0 +1,26 @@
+{
+  "status": "incomplete-source-draft-no-installable-apk",
+  "input_apk_sha256": "5a7a7d388c0fb24578bf23c375abaeb4f175991e28c340ae323c0d34f157a2b2",
+  "draft_classes6_sha256": "322828e4c8fc345ccbed0b5a0144bd7cc5afd023fc35ec8a59b047cb8b47cd61",
+  "draft_classes6_bytes": 90356,
+  "checks": {
+    "smali_assembled_with": "Apktool 2.12.1",
+    "dex_decompiled_with": "JADX 1.5.3",
+    "startup_hook_present": true,
+    "saved_state_guard_present": true,
+    "telegram_uri_present": true,
+    "main_activity_caption_hook_present": true
+  },
+  "premium_unlocked": false,
+  "server_requests_performed": false,
+  "apk_install_tested": false,
+  "device_ui_tested": false,
+  "native_module_premium_profile_available": false,
+  "limitations": [
+    "Downloaded module not available for inspection",
+    "Signed premium.offsets data not available",
+    "Server integrity behavior after re-signing untested",
+    "Native menu text and links remain unchanged",
+    "Caption layering over GL requires device verification"
+  ]
+}
