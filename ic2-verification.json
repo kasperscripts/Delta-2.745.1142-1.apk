@@ -1,0 +1,37 @@
+{
+  "status": "embedded_ui_priority_implemented_pending_phone_test",
+  "apk": "Delta-2.745.1142-1-Icon_Crack-IC2.apk",
+  "sha256": "244326cda450f30219c819d6b679a849b7cf9ec66bcb0d1802682d2390096a5a",
+  "size_bytes": 238428804,
+  "reported_symptom": "KEY_example still visible and key reported invalid",
+  "diagnosis": "File/config UI can take precedence over embedded UI. The selected path on the physical device was not traced.",
+  "change": "After native code decryption, install one branch at 0x849210 to the embedded UI path 0x849eb0 before argument/config/file override selection. No user data or files are deleted.",
+  "native_sha256": "d237fb410ebfd410f69a3349b9675011c64a8992d741159a2bbba7fe45de6711",
+  "arm64_tests": [
+    "constructor decrypts original code and installs only intended branch",
+    "static constructors initialize patched UI vector",
+    "actual initialized UI vector contains @Icon_Crack and no KEY_example",
+    "UI loader selects embedded UI before any Lua argument/config/file access",
+    "JNI_OnLoad and nativeStart complete"
+  ],
+  "luau_vm_cases": 25,
+  "luau_test_scope": [
+    "both validators",
+    "actual input sanitizer",
+    "actual Continue handler",
+    "actual GrantAccess handler changes is_unlocked, Ui.Enabled and sidebar visibility"
+  ],
+  "android16_packaging": "same uncompressed libraries, 16 KB ZIP alignment and compatibility manifest as prior Android16 build",
+  "signing_certificate_sha256": "5fe9cea48690773d6fe2d2b3234cdc5da67ebf2e6caddaba338755d0166fb0e3",
+  "same_signing_certificate_as_android16_build": true,
+  "android_device_tested": false,
+  "loader_patch": {
+    "entry": "0x11b4000",
+    "file_offset": "0x11a4000",
+    "trampoline": "0x11b4100",
+    "patch_site": "0x849210",
+    "branch_word": "0x1425abbc",
+    "embedded_path": "0x849eb0",
+    "mprotect_plt": "0x1108700"
+  }
+}

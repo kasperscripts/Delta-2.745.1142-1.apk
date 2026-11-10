@@ -1,14 +1,14 @@
 {
   "result": "pass",
-  "cases": 22,
+  "cases": 25,
   "runtime": "official Luau VM",
   "luau_commit": "12a6ba75883272c79b66b59815efef4c574196f6",
   "cases_covered": [
-    "fixed key accepted by both validators without HTTP",
-    "repeated fixed-key attempts",
-    "fixed key accepted with busy flag set",
-    "Continue invokes GrantAccess for fixed key",
-    "wrong key, empty key, lowercase variant and trailing space retain server validation and fail under mocked 429"
+    "both validators accept @Icon_Crack without HTTP",
+    "busy flag does not block fixed key",
+    "original sanitizer and Continue handler feed the validator",
+    "original GrantAccess handler unlocks UI state and sidebar",
+    "other inputs retain server validation; original sanitizer trims trailing whitespace"
   ],
   "android_device_tested": false
 }

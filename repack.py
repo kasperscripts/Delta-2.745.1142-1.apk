@@ -28,7 +28,7 @@ def main():
         if required not in dex:
             parser.error('The replacement DEX is missing a required branding string.')
     native = args.native.read_bytes() if args.native else None
-    if native is not None and hashlib.sha256(native).hexdigest() != '6d32e5290644e65f8f6722c6c924471aa7fce8ae2cc472273e591966694866d7':
+    if native is not None and hashlib.sha256(native).hexdigest() not in {'6d32e5290644e65f8f6722c6c924471aa7fce8ae2cc472273e591966694866d7', 'd237fb410ebfd410f69a3349b9675011c64a8992d741159a2bbba7fe45de6711'}:
         parser.error('Unexpected patched native library; rebuild using libzstd 1.5.7.')
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(args.original) as src, zipfile.ZipFile(args.output, 'w') as dst:

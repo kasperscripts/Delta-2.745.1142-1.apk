@@ -2,9 +2,17 @@
 
 Ключ **`@Icon_Crack`** принимается локально, без обращения к серверу и без проверки срока действия. Регистр имеет значение. Остальные ключи проходят исходную проверку.
 
-[**Скачать вариант для Android 16**](https://github.com/kasperscripts/Delta-2.745.1142-1.apk/raw/refs/heads/main/artifacts/Delta-2.745.1142-1-Icon_Crack-Android16.apk)
+[**Скачать IC2 для Android 16**](https://github.com/kasperscripts/Delta-2.745.1142-1.apk/raw/refs/heads/main/artifacts/Delta-2.745.1142-1-Icon_Crack-IC2.apk)
 
 Предыдущая сборка `branding-only` меняла только ссылки и подпись. В новой сборке `fixed-key` изменена сама проверка ключа. APK хранится в `artifacts/` через Git LFS.
+
+## IC2: приоритет встроенного меню
+
+В загрузчике найден путь, который может читать меню из файла/config перед встроенным блоком. После сообщения о старой подсказке `KEY_example` добавлен явный переход к встроенному изменённому UI. Файлы и данные пользователя не удаляются. На физическом телефоне источник старого UI не трассировался, поэтому причина наблюдаемого поведения требует подтверждения повторной проверкой.
+
+В IC2 подсказка должна быть **`@Icon_Crack`**. Проверены холодная инициализация, содержимое фактически созданного UI-вектора, выбор встроенного пути и завершение JNI/nativeStart в ARM64-эмуляции. В Luau VM проверяется исходная цепочка обработки текста, «Continue» и `GrantAccess`, включая изменение флагов интерфейса: **25 сценариев**. Подробности — `ic2-verification.json`.
+
+Сертификат и настройки упаковки совпадают с вариантом Android 16. Обновление не требует удаления данных приложения. Запуск на устройстве для IC2 ещё не подтверждён.
 
 ## Вариант Android 16
 
@@ -32,9 +40,9 @@
 
 ## Проверки
 
-- **22 случая в официальной Luau VM:** фиксированный ключ, повторные попытки, занятое состояние проверки, обработчик «Continue», неверный ключ, пустая строка, другой регистр и пробел в конце. Для `@Icon_Crack` сетевой обработчик не вызывается.
+- **25 случаев в официальной Luau VM:** фиксированный ключ, повторные попытки, занятое состояние проверки, обработчик «Continue», неверный ключ, пустая строка, другой регистр и пробел в конце. Для `@Icon_Crack` сетевой обработчик не вызывается.
 - ARM64-декодер библиотеки восстановил изменённый байткод после обратной упаковки.
-- Начальный загрузчик изменённой нативной библиотеки завершился в ARM64-эмуляции; расшифрованный машинный код совпал с исходным побайтно.
+- Начальный загрузчик изменённой нативной библиотеки завершился в ARM64-эмуляции; для IC2 отличается только один намеренно установленный переход к встроенному UI.
 - Проверены выравнивание APK, подписи v2/v3, контрольные суммы и сохранность остальных файлов.
 
 **На Android-устройстве установка и запуск не проверены.** Проверки VM и эмуляции не заменяют проверку всего приложения на устройстве. Вариант Android 16 подписан отдельным сертификатом RSA 3072; обновление поверх версии с другим сертификатом может не установиться.
@@ -57,8 +65,10 @@
 java -jar work/apktool.jar d -r -o work/decoded work/original.apk
 cp smali/Loader.smali work/decoded/smali_classes4/com/roblox/gloop/
 python3 patch_native.py work/decoded/lib/arm64-v8a/libzstd-jni-1.5.7-6.so work/libzstd-fixed-key.so
+# Для IC2: нужны pyelftools==0.33 и keystone-engine==0.9.2.
+python3 force_builtin_ui.py work/libzstd-fixed-key.so work/libzstd-ic2.so
 java -jar work/apktool.jar b work/decoded -o work/rebuilt.apk
-python3 repack.py work/original.apk work/decoded/build/apk/classes4.dex work/fixed-key-unsigned.apk --native work/libzstd-fixed-key.so
+python3 repack.py work/original.apk work/decoded/build/apk/classes4.dex work/fixed-key-unsigned.apk --native work/libzstd-ic2.so
 python3 -c "import zipfile,pathlib; pathlib.Path('work/debug.keystore').write_bytes(zipfile.ZipFile('work/uber-apk-signer.jar').read('debug.keystore'))"
 java -jar work/uber-apk-signer.jar --apks work/fixed-key-unsigned.apk --ksDebug work/debug.keystore --out work/signed
 ```
@@ -77,7 +87,7 @@ e1299fd6fcf4da527dd53735b56127e8ea922a321128123b9c32d619bba1d835  uber-apk-signe
 После сборки официального [Luau](https://github.com/luau-lang/luau) на коммите `12a6ba75883272c79b66b59815efef4c574196f6`:
 
 ```sh
-python3 tests/prepare_vm_tests.py work/libzstd-fixed-key.so work/luau work/vm-tests
+python3 tests/prepare_vm_tests.py work/libzstd-ic2.so work/luau work/vm-tests
 g++ -std=c++17 -O2 -Iwork/luau/VM/include tests/test_key_vm.cpp work/luau/build/release/libluauvm.a work/luau/build/release/libluaucommon.a -lpthread -o work/test-key-vm
 work/test-key-vm work/vm-tests
 ```
@@ -97,3 +107,5 @@ work/build-tools/zipalign -c -P 16 4 work/Android16.apk
 ```
 
 Пароль ключа вводится локально при подписании. Приватный ключ сборки в репозитории отсутствует.
+
+`force_builtin_ui.py` добавляет RX-сегмент с обёрткой первого конструктора, вызывает исходный декодер и устанавливает переход к встроенному UI с очисткой кэша инструкций. Остальной расшифрованный код сохраняется. Воспроизводимость ограничена исходной библиотекой с проверяемым SHA-256.

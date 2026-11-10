@@ -19,5 +19,5 @@ def vm_test_blob(bc,target):
  return bc.build(overrides=over,extra=[wrapper],main=bc.count)
 
 bc=BC(decode_native(args.native.read_bytes()))
-for i in [54,55,107]:(R/f'test-proto-{i}.luauc').write_bytes(vm_test_blob(bc,i))
+for i in [54,55,101,106,107]:(R/f'test-proto-{i}.luauc').write_bytes(vm_test_blob(bc,i))
 print('Prepared VM fixtures from the patched native library.')
