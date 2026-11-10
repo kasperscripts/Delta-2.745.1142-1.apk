@@ -708,11 +708,6 @@
 
     move-result v1
 
-    if-nez v1, :icon_crack_native_error
-
-    invoke-static {p1}, Lcom/roblox/gloop/IconCrackBadge;->attach(Landroid/app/Activity;)V
-
-    :icon_crack_native_error
     if-eqz v1, :cond_0
 
     new-instance v0, Ljava/lang/StringBuilder;

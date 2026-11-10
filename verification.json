@@ -1,28 +1,23 @@
 {
-  "status": "partial_branding_only",
-  "key_check": "unchanged",
+  "status": "fixed_key_implemented",
+  "fixed_key": "@Icon_Crack",
+  "matching": "exact_case_sensitive",
+  "fixed_key_http_requests": 0,
+  "validation_test": "22 cases in official Luau VM, including Continue callback and busy state",
+  "native_constructor_test": "ARM64 emulation completed; decrypted native machine code byte-identical to original",
+  "native_ui_decoder_test": "ARM64 decoder recovered the tested patched bytecode",
   "android_device_tested": false,
-  "apk_signature_verified": [
+  "signature_verified": [
     "v2",
     "v3"
   ],
   "zip_alignment_verified": true,
   "original_apk_sha256": "4d22c8be0f81251d18dc53a49b42a4c27ec64eb1ee039106a33913987027c3f2",
-  "modified_apk_sha256": "afaae337df8db937bd7bda5895b657fec73f00afdeff10279c8835efce262b80",
-  "modified_apk_size_bytes": 172323460,
+  "modified_apk_sha256": "b2e347dc350b3519f331833366f07e95e6ee3a7fa0d585d6bb508733a35a47e2",
+  "modified_apk_size_bytes": 172319364,
   "changed_non_signature_entry_contents": [
-    "classes4.dex"
-  ],
-  "changed_signature_entries": [
-    "META-INF/MANIFEST.MF"
-  ],
-  "added_signature_entries": [
-    "META-INF/ANDROIDD.RSA",
-    "META-INF/ANDROIDD.SF"
-  ],
-  "removed_signature_entries": [
-    "META-INF/KEY.RSA",
-    "META-INF/KEY.SF"
+    "classes4.dex",
+    "lib/arm64-v8a/libzstd-jni-1.5.7-6.so"
   ],
   "preserved_entries_sha256": {
     "AndroidManifest.xml": "d15efb96fde6a05c2be2a236b853b45a62f1543fb1dcaf843f0cea4e4e5a3f35",
@@ -31,39 +26,12 @@
     "classes3.dex": "3921ad996ab8c5656c0e8d890e2f9fac04a9af67e8f7d9bad03199323365d8e7",
     "resources.arsc": "cce5fad45ae6ea240940cdb18f5be64eb3314bd5e39d04050cc3b5b013dda173"
   },
-  "native_libraries": {
-    "lib/arm64-v8a/libbacktrace-native.so": {
-      "original_sha256": "f59fcb7eb6c77439676c38a43a2c1a09734b5314456c896807d62dc7609577d4",
-      "modified_sha256": "f59fcb7eb6c77439676c38a43a2c1a09734b5314456c896807d62dc7609577d4"
-    },
-    "lib/arm64-v8a/libdatastore_shared_counter.so": {
-      "original_sha256": "d3e48717c9aa147e0ab21063ba0e8e0211cabf8bf40b222640829519edbf58e1",
-      "modified_sha256": "d3e48717c9aa147e0ab21063ba0e8e0211cabf8bf40b222640829519edbf58e1"
-    },
-    "lib/arm64-v8a/libimage_processing_util_jni.so": {
-      "original_sha256": "f0e4611db0d6b68942d8ba6977519f3dd1cdbffa87b7fc16d8006696ba954af4",
-      "modified_sha256": "f0e4611db0d6b68942d8ba6977519f3dd1cdbffa87b7fc16d8006696ba954af4"
-    },
-    "lib/arm64-v8a/librenderscript-toolkit.so": {
-      "original_sha256": "84a2c8fc0fcd917cfd8e0b7ad7b6dc8ba60dfa7e398bf1ee924909051200bd27",
-      "modified_sha256": "84a2c8fc0fcd917cfd8e0b7ad7b6dc8ba60dfa7e398bf1ee924909051200bd27"
-    },
-    "lib/arm64-v8a/libroblox.so": {
-      "original_sha256": "3d3dc6e858676b2a1bdbde94d5a20c5ff4ff5e88d2ed066f683a7da76487b319",
-      "modified_sha256": "3d3dc6e858676b2a1bdbde94d5a20c5ff4ff5e88d2ed066f683a7da76487b319"
-    },
-    "lib/arm64-v8a/libsurface_util_jni.so": {
-      "original_sha256": "6cb2eac3c68e6a82ce2a5ea5aba86749eb8c609914392e125f6cdfbc208992f8",
-      "modified_sha256": "6cb2eac3c68e6a82ce2a5ea5aba86749eb8c609914392e125f6cdfbc208992f8"
-    },
-    "lib/arm64-v8a/libtrampoline.so": {
-      "original_sha256": "50506346d08f40a483df80025b62246298816ebf344ec3ccdb854a14582bdd35",
-      "modified_sha256": "50506346d08f40a483df80025b62246298816ebf344ec3ccdb854a14582bdd35"
-    },
-    "lib/arm64-v8a/libzstd-jni-1.5.7-6.so": {
-      "original_sha256": "fc3fd01754502ee1f001e190e7af2b760378bd20493c370a70f395d67484b554",
-      "modified_sha256": "fc3fd01754502ee1f001e190e7af2b760378bd20493c370a70f395d67484b554"
-    }
-  },
-  "badge": "Android overlay at bottom right; visible after nativeStart returns 0"
+  "patched_native_sha256": "6d32e5290644e65f8f6722c6c924471aa7fce8ae2cc472273e591966694866d7",
+  "patched_ui_prototypes": [
+    54,
+    55
+  ],
+  "native_ui_blob_offset": "0x2e08a9",
+  "native_ui_blob_size": 56477,
+  "caption": "Inside the menu; the previous Android overlay was removed."
 }

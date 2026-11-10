@@ -1,0 +1,14 @@
+{
+  "result": "pass",
+  "cases": 22,
+  "runtime": "official Luau VM",
+  "luau_commit": "12a6ba75883272c79b66b59815efef4c574196f6",
+  "cases_covered": [
+    "fixed key accepted by both validators without HTTP",
+    "repeated fixed-key attempts",
+    "fixed key accepted with busy flag set",
+    "Continue invokes GrantAccess for fixed key",
+    "wrong key, empty key, lowercase variant and trailing space retain server validation and fail under mocked 429"
+  ],
+  "android_device_tested": false
+}
