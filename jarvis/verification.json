@@ -1,0 +1,40 @@
+{
+  "file": "Jarvis_Icon_Crack.apk",
+  "size": 2221203,
+  "sha256": "4c54057ecaf62301242e6c358fc2bffd21f05b2ff227064415fbd9d792cb2447",
+  "original_sha256": "1bac23dc8aacfbef28f066842216ce3a68b3fa0f29e874fa9c29fb3a225f5001",
+  "package": "com.jarvis.oxide.loader.local",
+  "version_name": "3.5.42-Icon_Crack",
+  "version_code": 70,
+  "application_label": "Jarvis @Icon_Crack",
+  "key": "@Icon_Crack",
+  "telegram": "https://t.me/Icon_Crack",
+  "displayed_telegram": "t.me/Icon_Crack",
+  "changed_entries": [
+    "AndroidManifest.xml",
+    "assets/jarvis-local.so",
+    "classes2.dex"
+  ],
+  "zip_crc_valid": true,
+  "signatures_v2_v3_verified": true,
+  "signer_certificate_sha256": "5fe9cea48690773d6fe2d2b3234cdc5da67ebf2e6caddaba338755d0166fb0e3",
+  "zipalign_16kb_check_passed": true,
+  "decompiled_actual_key_validator_jvm_cases": 7,
+  "login_format_gate_cases": 7,
+  "decoded_helper_strings_checked": 8,
+  "outer_and_embedded_key_validator_smali_identical": true,
+  "both_dex_sizes_string_offsets_and_ids_preserved": true,
+  "both_dex_sha1_and_adler32_valid": true,
+  "dex_bytes_outside_string_data_and_checksums_unchanged": true,
+  "native_bytes_outside_embedded_dex_unchanged": true,
+  "all_png_and_other_resources_byte_identical": true,
+  "original_faust_matches_raw_utf8_utf16": 0,
+  "original_faust_matches_in_embedded_dex_and_decoded_helper_strings": 0,
+  "lsparanoid_strings_checked": {
+    "outer": 223,
+    "embedded": 82
+  },
+  "lsparanoid_strings_unchanged": true,
+  "android_device_tested": false,
+  "verification_limits": "No Android device/emulator game launch or rendering test. JVM checks execute the actual decompiled local validator with only Android Base64 stubbed and its checked-exception declaration restored for javac."
+}

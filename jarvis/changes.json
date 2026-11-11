@@ -1,0 +1,127 @@
+{
+  "original_sha256": "1bac23dc8aacfbef28f066842216ce3a68b3fa0f29e874fa9c29fb3a225f5001",
+  "key": "@Icon_Crack",
+  "telegram": "https://t.me/Icon_Crack",
+  "displayed_telegram": "t.me/Icon_Crack",
+  "outer_dex_sha256": "e113da19a5a622ed89009dcf889e56aebf1316ae88fc7f1ebb1db2d09ba68270",
+  "embedded_dex_sha256": "17ddc2429aa028ae459c1d965b2c63a4331b23d2059d40ab0fb3af6377d8e3b3",
+  "embedded_dex_offset": 2229636,
+  "embedded_dex_size": 1387684,
+  "native_sha256": "e5c7c8264fc16cfc48e49eb390d8f3be6bd51a12d21e012fbeb0f405c1abcae6",
+  "native_size": 4134400,
+  "outer_replacements": [
+    {
+      "offset": 29716,
+      "kind": "encoded_text",
+      "old": "@faustgenius",
+      "new": "@Icon_Crack"
+    },
+    {
+      "offset": 33072,
+      "kind": "class_namespace",
+      "old": "Lcom/x/faustgenius/io/q/a;",
+      "new": "Lcom/x/icon_crack_/io/q/a;"
+    },
+    {
+      "offset": 33100,
+      "kind": "class_namespace",
+      "old": "Lcom/x/faustgenius/io/q/b;",
+      "new": "Lcom/x/icon_crack_/io/q/b;"
+    },
+    {
+      "offset": 33128,
+      "kind": "class_namespace",
+      "old": "Lcom/x/faustgenius/io/q/c;",
+      "new": "Lcom/x/icon_crack_/io/q/c;"
+    },
+    {
+      "offset": 35337,
+      "kind": "encoded_text",
+      "old": "t.me/faustgenius",
+      "new": "t.me/Icon_Crack"
+    },
+    {
+      "offset": 38600,
+      "kind": "encoded_text",
+      "old": "Ключ: @faustgenius",
+      "new": "Ключ: @Icon_Crack"
+    },
+    {
+      "offset": 38847,
+      "kind": "encoded_text",
+      "old": "Включи SANDBOX MODE у Oxide и у t.me/faustgenius в настройках Вирту — режим должен быть включён у ОБОИХ приложений.\n\nДобавь их в один LuluboxSuper 2.1.2 и открой загрузчик внутри него. Перед установкой закрой Oxide.",
+      "new": "Включи SANDBOX MODE у Oxide и у t.me/Icon_Crack в настройках Вирту — режим должен быть включён у ОБОИХ приложений.\n\nДобавь их в один LuluboxSuper 2.1.2 и открой загрузчик внутри него. Перед установкой закрой Oxide."
+    },
+    {
+      "offset": 39306,
+      "kind": "encoded_text",
+      "old": "Enable SANDBOX MODE for both Oxide and t.me/faustgenius in the virtual app settings — BOTH apps must have it on.\n\nAdd both apps to the same LuluboxSuper 2.1.2 environment and open this loader inside it. Close Oxide before installing.",
+      "new": "Enable SANDBOX MODE for both Oxide and t.me/Icon_Crack in the virtual app settings — BOTH apps must have it on.\n\nAdd both apps to the same LuluboxSuper 2.1.2 environment and open this loader inside it. Close Oxide before installing."
+    },
+    {
+      "offset": 40866,
+      "kind": "encoded_text",
+      "old": "Платформа Lulubox недоступна. Добавь t.me/faustgenius и Oxide в LuluboxSuper 2.1.2 и открой t.me/faustgenius внутри виртуалки. Если платформа ещё не создана, запусти и закрой Oxide один раз",
+      "new": "Платформа Lulubox недоступна. Добавь t.me/Icon_Crack и Oxide в LuluboxSuper 2.1.2 и открой t.me/Icon_Crack внутри виртуалки. Если платформа ещё не создана, запусти и закрой Oxide один раз"
+    }
+  ],
+  "inner_replacements": [
+    {
+      "offset": 27528,
+      "kind": "encoded_text",
+      "old": "@faustgenius",
+      "new": "@Icon_Crack"
+    },
+    {
+      "offset": 31363,
+      "kind": "class_namespace",
+      "old": "Lcom/x/faustgenius/io/q/a;",
+      "new": "Lcom/x/icon_crack_/io/q/a;"
+    },
+    {
+      "offset": 31391,
+      "kind": "class_namespace",
+      "old": "Lcom/x/faustgenius/io/q/b;",
+      "new": "Lcom/x/icon_crack_/io/q/b;"
+    },
+    {
+      "offset": 31419,
+      "kind": "class_namespace",
+      "old": "Lcom/x/faustgenius/io/q/c;",
+      "new": "Lcom/x/icon_crack_/io/q/c;"
+    },
+    {
+      "offset": 34029,
+      "kind": "encoded_text",
+      "old": "t.me/faustgenius",
+      "new": "t.me/Icon_Crack"
+    },
+    {
+      "offset": 38077,
+      "kind": "encoded_text",
+      "old": "Ключ: @faustgenius",
+      "new": "Ключ: @Icon_Crack"
+    },
+    {
+      "offset": 38667,
+      "kind": "encoded_text",
+      "old": "Включи SANDBOX MODE у Oxide и у t.me/faustgenius в настройках Вирту — режим должен быть включён у ОБОИХ приложений.\n\nДобавь их в один LuluboxSuper 2.1.2 и открой загрузчик внутри него. Перед установкой закрой Oxide.",
+      "new": "Включи SANDBOX MODE у Oxide и у t.me/Icon_Crack в настройках Вирту — режим должен быть включён у ОБОИХ приложений.\n\nДобавь их в один LuluboxSuper 2.1.2 и открой загрузчик внутри него. Перед установкой закрой Oxide."
+    },
+    {
+      "offset": 39126,
+      "kind": "encoded_text",
+      "old": "Enable SANDBOX MODE for both Oxide and t.me/faustgenius in the virtual app settings — BOTH apps must have it on.\n\nAdd both apps to the same LuluboxSuper 2.1.2 environment and open this loader inside it. Close Oxide before installing.",
+      "new": "Enable SANDBOX MODE for both Oxide and t.me/Icon_Crack in the virtual app settings — BOTH apps must have it on.\n\nAdd both apps to the same LuluboxSuper 2.1.2 environment and open this loader inside it. Close Oxide before installing."
+    },
+    {
+      "offset": 41310,
+      "kind": "encoded_text",
+      "old": "Платформа Lulubox недоступна. Добавь t.me/faustgenius и Oxide в LuluboxSuper 2.1.2 и открой t.me/faustgenius внутри виртуалки. Если платформа ещё не создана, запусти и закрой Oxide один раз",
+      "new": "Платформа Lulubox недоступна. Добавь t.me/Icon_Crack и Oxide в LuluboxSuper 2.1.2 и открой t.me/Icon_Crack внутри виртуалки. Если платформа ещё не создана, запусти и закрой Oxide один раз"
+    }
+  ],
+  "dex_sizes_and_string_offsets_preserved": true,
+  "dex_string_id_order_checked": true,
+  "native_bytes_outside_embedded_dex_unchanged": true
+}

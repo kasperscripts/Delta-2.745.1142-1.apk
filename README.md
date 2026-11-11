@@ -115,3 +115,5 @@ GrandProject: [GrandProject IC3](grandproject/README.md) — локальная 
 
 
 Phantom: [@Icon_Crack v2 и LuluBox 2.1.2](phantom/README.md) — удалена центральная надпись из внутреннего меню, сохранён ключ `@Icon_Crack`; LuluBox без изменений.
+
+Jarvis: [@Icon_Crack](jarvis/README.md) — заменены ключ, подписи и адрес канала во внешнем загрузчике и встроенном меню.
